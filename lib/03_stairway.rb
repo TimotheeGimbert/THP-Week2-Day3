@@ -46,15 +46,35 @@ end
 
 def playGame()
   step = 0
+  round = 0
   while (step < 10) do
     roundWinner = playRound()
     step = stepUpdate(roundWinner, step)
+    round += 1
   end
+  return round
+end
+
+def average_finish_time()
+  nbRoundsPlayed = 0
+  100.times do
+    nbRoundsPlayed += playGame()
+  end 
+  avgRoundsPlayed = nbRoundsPlayed / 100
+  puts "Average number of rounds played in order to win : #{avgRoundsPlayed}"
+  return avgRoundsPlayed
 end
 
 def perform()
   playGame()
   puts "Yes congrats !!! You WIN the game!"
+  
+  puts "To continue with the statistic average_finish_time calculation, enter any key below :"
+  puts "> "
+  varTemp = gets.chomp
+  avgRoundsToWin = average_finish_time()
+  puts "This time, #{average_finish_time} rounds were needed to win the game against the computer :)"
 end
 
 perform()
+
